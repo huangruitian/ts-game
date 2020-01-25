@@ -19,7 +19,13 @@ module.exports = {
         rules:[ //加载规则
           {
             test: /.ts$/,  //加载到ts结尾的文件交给下面的loader加载器处理
-            loader: "ts-loader"
+            // loader: "ts-loader"
+            use:{
+              loader: "ts-loader",
+              options: {
+                transpileOnly:true
+              }
+            }
           }
         ]
     },
