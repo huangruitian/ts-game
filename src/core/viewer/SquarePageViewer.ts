@@ -1,49 +1,45 @@
+import Square from "../Square";
+import { IViewer } from "../types";
+import PageConfig from "./PageConfig";
+import $ from "jquery";
+
 /**
- * 显示一个小方块到页面上
- * 我们要知道什么？
- * 小方块 square，
- * 容器 container
- * 显示者和小方块都实现了IViewer 这个契约，把两者就联系起来了。
- * 
+ * 页面显示类，需要知道两个东西，你要显示什么？小方块
+ * 你要在哪里显示，容器container
  */
-import { Square } from './../Square'
-import { IViewer } from '../types';
-import PageConfig from './PageConfig';
-import $ from 'jquery'
+class SquarePageViewer implements IViewer {
+  private dom?: JQuery<HTMLElement>
+  private isRemove: boolean = false
+  constructor(
+    private square: Square,
+    private container: JQuery<HTMLElement>
+  ) { }
+  show() {
+    if(this.isRemove){
+      return
+    }
+    if (!this.dom) {
+      this.dom = $('<div>').css({
+        position: 'absolute',
+        width: PageConfig.SquareSize.width,
+        height: PageConfig.SquareSize.height,
+        border: '1px solid #3c3c3c',
+        boxSizing: 'border-box'
+      }).appendTo(this.container)
+    }
+    // 注意这里的坐标，是根据容器的逻辑坐标
+    this.dom.css({
+      top: this.square.point.y * PageConfig.SquareSize.height,
+      left: this.square.point.x * PageConfig.SquareSize.width,
+      background: this.square.color,
+    })
+  }
+  remove() {
+    if(this.dom && !this.isRemove){
+      this.dom.remove()
+      this.isRemove = true
+    }
+  }
+}
 
-// 显示者
-export class SquarePageViewer implements IViewer {
-     private dom?:JQuery<HTMLElement>
-     private isRemove:boolean = false
-
-     show(): void {
-         if(this.isRemove){
-             return;
-         }
-         if(!this.dom){
-            this.dom = $("<div>").css({
-                position:'absolute',
-                width: PageConfig.SquareSize.width,
-                height: PageConfig.SquareSize.height,
-                border: PageConfig.SquareSize.border,
-                boxSizing: PageConfig.SquareSize.boxSizing,   
-            }).appendTo(this.container)
-         }
-         this.dom.css({
-             left: this.square.point.x * PageConfig.SquareSize.width,
-             top: this.square.point.y * PageConfig.SquareSize.height,
-             background: this.square.color
-         })
-     }
-
-     remove(): void {
-         if(!this.isRemove && this.dom){
-             this.dom.remove();
-         }
-     }
-
-     constructor(
-         private square:Square,
-         private container:JQuery<HTMLElement>
-     ) { }
- }
+export default SquarePageViewer
