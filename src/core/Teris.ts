@@ -28,7 +28,7 @@ class TShape extends SquareGroup {
     centerPoint: IPoint,
     color: string,
   ) {
-    const shape: IPoint[] = [
+    const shape: Shape = [
       { x: 0, y: 0 },
       { x: 0, y: -1 },
       { x: -1, y: 0 },
@@ -43,7 +43,7 @@ class LineShape extends SquareGroup {
     centerPoint: IPoint,
     color: string,
   ) {
-    const shape: IPoint[] = [
+    const shape: Shape = [
       { x: 0, y: 0 },
       { x: 0, y: -1 },
       { x: 0, y: 1 },
@@ -62,7 +62,7 @@ class LShape extends SquareGroup {
     centerPoint: IPoint,
     color: string,
   ) {
-    const shape: IPoint[] = [
+    const shape: Shape = [
       { x: 0, y: 0 },
       { x: -1, y: 0 },
       { x: 1, y: 0 },
@@ -80,7 +80,7 @@ class LMirrorShape extends SquareGroup {
     centerPoint: IPoint,
     color: string,
   ) {
-    const shape: IPoint[] = [
+    const shape: Shape = [
       { x: 0, y: 0 },
       { x: -1, y: 0 },
       { x: -2, y: 0 },
@@ -99,7 +99,7 @@ class SShape extends SquareGroup {
     centerPoint: IPoint,
     color: string,
   ) {
-    const shape: IPoint[] = [
+    const shape: Shape = [
       { x: 0, y: 0 },
       { x: 0, y: 1 },
       { x: -1, y: 0 },
@@ -118,7 +118,7 @@ class SMirrorShape extends SquareGroup {
     centerPoint: IPoint,
     color: string,
   ) {
-    const shape: IPoint[] = [
+    const shape: Shape = [
       { x: 0, y: 0 },
       { x: -1, y: 0 },
       { x: -1, y: 1 },
@@ -137,7 +137,7 @@ class OShape extends SquareGroup {
     centerPoint: IPoint,
     color: string,
   ) {
-    const shape: IPoint[] = [
+    const shape: Shape = [
       { x: 0, y: 0 }
     ]
     super(centerPoint, color, shape)
@@ -149,13 +149,13 @@ class OShape extends SquareGroup {
 }
 
 const squares = [
-  SquareShape,     //田字型
   TShape,            
-  LineShape,       //线型
+  LineShape,          //线型
   LShape,
   LMirrorShape,       //反L形
   SShape,
   SMirrorShape,
+  SquareShape,        //田字型
   OShape,
 ]
 
