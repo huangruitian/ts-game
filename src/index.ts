@@ -1,23 +1,34 @@
-import Square from "./core/Square";
+
 import SquarePageViewer from "./core/viewer/SquarePageViewer";
 import $ from "jquery";
+import createTeris from "./core/Teris";
+import { IPoint } from "./core/types";
+import TerisRule from "./core/TerisRule";
+import { MoveDirection } from "./core/viewer/PageConfig";
 
-const sq = new Square()
-sq.viewer = new SquarePageViewer(sq, $('#root'))
+const teris = createTeris({x:3, y:3})
+
+teris.squares.forEach(sq => {
+  sq.viewer = new SquarePageViewer(sq, $('#root'))
+}) 
 
 $('#btnDown').click(() => {
-   sq.point = {
-       x:sq.point.x,
-       y:sq.point.y + 1
-   }
+    TerisRule.move(MoveDirection.Down, teris)
 })
 
-$('#btnRemove').click(() => {
-    if(sq.viewer){
-      sq.viewer.remove()
-    }
+$('#btnUp').click(() => {
+    TerisRule.move(MoveDirection.Up, teris)
 })
 
-$('#btnShow').click(() => {
-    sq.viewer = new SquarePageViewer(sq, $('#root'))
+$('#btnLeft').click(() => {
+    TerisRule.move(MoveDirection.Left, teris)
+})
+
+$('#btnRight').click(() => {
+    TerisRule.move(MoveDirection.Right, teris)
+})
+
+
+$('#rotate').click(() => {
+    TerisRule.rotate(teris)
 })

@@ -6,6 +6,7 @@ import { IPoint, IViewer } from "./types"
 class Square {
     private _point: IPoint = { x: 0, y: 0 }
     private _color: string = 'red'
+    // class SquarePageViewer implements IViewer，具体怎么显示抛给外面处理；
     private _viewer?: IViewer
     get point() {
         return this._point
@@ -28,7 +29,7 @@ class Square {
     }
     set viewer(val) {
         this._viewer = val
-        // 有值自动显示出来
+        // 设置了显示着就自动显示出来
         if(val){
             val.show()
         }

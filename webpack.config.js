@@ -24,8 +24,8 @@ module.exports = {
         // loader: "ts-loader"
         use: {
           loader: "ts-loader",
-          options: { 
-            transpileOnly: true
+          options: {      
+            transpileOnly: true       //ts 和webpack-server-dev 联用，不然编译报错
           }
         }
       }
